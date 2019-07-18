@@ -22,7 +22,8 @@ int main()
 	dstAddr.sin_family = AF_INET;
 	dstAddr.sin_port = htons(8888);
 	//dstAddr.sin_addr.S_un.S_addr = inet_addr("234.2.2.2");
-	inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr.S_un.S_addr);
+	//inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr.S_un.S_addr);
+	inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr);
 	const char* sendData = "Hello word!";
 	while (1)
 	{
