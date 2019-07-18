@@ -22,25 +22,20 @@ int main()
 	//设置该套接字为广播类型
 	setsockopt(sendSocket, SOL_SOCKET, SO_BROADCAST, (char*)&bOpt, sizeof(bOpt));
 
-	//
-	sockaddr_in sourAddr;
-	sourAddr.sin_family = AF_INET;
-	inet_pton(AF_INET, "127.0.0.1", &sourAddr.sin_addr);
-	sourAddr.sin_port = htons(10);
-	/*if (SOCKET_ERROR == bind(sendSocket, (SOCKADDR*)&sourAddr, sizeof(SOCKADDR)))
-	{
-		int nErr = WSAGetLastError();
-		printf("bind err:%d", nErr);
-		return 0;
-	}*/
 
+	//传入的网卡IP地址
+	unsigned long address;
+	inet_pton(AF_INET, "127.0.0.1", &address);
+	setsockopt(sendSocket, IPPROTO_IP, IP_MULTICAST_IF, (char FAR *)&address, sizeof(address));
+	
 	//
 	sockaddr_in dstAddr;
 	dstAddr.sin_family = AF_INET;
 	//dstAddr.sin_addr.S_un.S_addr = inet_addr("234.2.2.2");
-	//inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr.S_un.S_addr);
-	inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr);
+	inet_pton(AF_INET, "238.0.0.1", &dstAddr.sin_addr.S_un.S_addr);
 	dstAddr.sin_port = htons(8888);
+
+	//
 	const char* sendData = "Hello word!";
 	while (1)
 	{
