@@ -21,8 +21,9 @@ int main()
 	//设置传输协议、端口以及目的地址 
 	sockaddr_in serAddr;
 	serAddr.sin_family = AF_INET;
-	serAddr.sin_port = htons(8888);
 	serAddr.sin_addr.S_un.S_addr = INADDR_ANY;
+//	inet_pton(AF_INET, "127.0.0.1", &serAddr.sin_addr.S_un.S_addr);
+    serAddr.sin_port = htons(8888);
 
 	if (bind(serSocket, (sockaddr*)&serAddr, sizeof(serAddr)) == SOCKET_ERROR)	 //将socket绑定地址 
 	{
@@ -33,9 +34,9 @@ int main()
 
 	//加入组播组
 	ip_mreq multiCast;
-	multiCast.imr_interface.S_un.S_addr = INADDR_ANY;		//本地某一网络设备接口的IP地址。
-															//multiCast.imr_multiaddr.S_un.S_addr = inet_addr("234.2.2.2");	//组播组的IP地址。
-	inet_pton(AF_INET, "238.0.0.1", &multiCast.imr_multiaddr.S_un.S_addr);
+	multiCast.imr_interface.S_un.S_addr = INADDR_ANY;		//本地某一网络设备接口的IP地址。	
+	//inet_pton(AF_INET, "127.0.0.1", &multiCast.imr_interface.S_un.S_addr);
+	inet_pton(AF_INET, "238.0.0.1", &multiCast.imr_multiaddr.S_un.S_addr);//组播组的IP地址。
 	setsockopt(serSocket, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*)&multiCast, sizeof(multiCast));
 
 	sockaddr_in clientAddr;
