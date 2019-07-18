@@ -8,7 +8,12 @@ ipch/
 *.VC.opendb
 *.VC.db
 Debug/
-
+*.iobj
+*.ipdb
+*.VC.db
+.vs/
+*.log
+*.tlog
 
 # Prerequisites
 *.d
