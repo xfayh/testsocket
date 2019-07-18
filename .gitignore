@@ -7,6 +7,7 @@
 ipch/
 *.VC.opendb
 *.VC.db
+Debug/
 
 
 # Prerequisites
