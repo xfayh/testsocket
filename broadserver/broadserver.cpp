@@ -22,7 +22,6 @@ int main()
 	//设置该套接字为广播类型
 	setsockopt(sendSocket, SOL_SOCKET, SO_BROADCAST, (char*)&bOpt, sizeof(bOpt));
 
-
 	//传入的网卡IP地址
 	unsigned long address;
 	inet_pton(AF_INET, "127.0.0.1", &address);

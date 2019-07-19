@@ -42,7 +42,7 @@ int main() {
 		}
 		
 	}
-
+	
 	closesocket(sock);
 	WSACleanup();
 	return 0;
